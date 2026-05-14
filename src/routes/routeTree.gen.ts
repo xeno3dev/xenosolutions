@@ -45,10 +45,6 @@ export const routeTree = RootRoute.addChildren([
   AboutRoute,
   BillingParentRoute.addChildren([
     BillingIndexRoute,
-    BillingLoginRoute,
-    BillingSignupRoute,
-    BillingForgotPasswordRoute,
-    BillingResetPasswordRoute,
     BillingSubscriptionRoute,
     BillingInvoicesRoute,
     BillingInvoiceDetailRoute,
@@ -60,5 +56,9 @@ export const routeTree = RootRoute.addChildren([
     BillingCancelRoute,
     BillingNotFoundRoute,
   ]),
+  BillingLoginRoute,
+  BillingSignupRoute,
+  BillingForgotPasswordRoute,
+  BillingResetPasswordRoute,
   NotFoundRoute,
 ])

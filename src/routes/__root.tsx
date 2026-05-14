@@ -55,7 +55,8 @@ export const AboutRoute = createRoute({
   component: () => import('./routes/about').then(m => ({ default: m.About })),
 })
 
-// ─── Billing Parent Route ──────────────────────────────────────────────────
+// ─── Billing Layout (Protected) ─────────────────────────────────────────────
+// All routes nested here require an authenticated session.
 
 export const BillingParentRoute = createRoute({
   getParentRoute: () => Route,
@@ -63,31 +64,11 @@ export const BillingParentRoute = createRoute({
   component: () => import('./routes/billing/_layout').then(m => ({ default: m.BillingLayout })),
 })
 
-// ─── Billing Child Routes ───────────────────────────────────────────────────
+// ─── Billing Child Routes (protected, inside sidebar layout) ────────────────
 
 export const BillingIndexRoute = BillingParentRoute.createChild({
   path: '/',
   component: () => import('./billing/index').then(m => ({ default: m.BillingHomePage })),
-})
-
-export const BillingLoginRoute = BillingParentRoute.createChild({
-  path: '/login',
-  component: () => import('./billing/login').then(m => ({ default: m.BillingLoginPage })),
-})
-
-export const BillingSignupRoute = BillingParentRoute.createChild({
-  path: '/signup',
-  component: () => import('./billing/signup').then(m => ({ default: m.BillingSignupPage })),
-})
-
-export const BillingForgotPasswordRoute = BillingParentRoute.createChild({
-  path: '/forgot-password',
-  component: () => import('./billing/forgot-password').then(m => ({ default: m.ForgotPasswordPage })),
-})
-
-export const BillingResetPasswordRoute = BillingParentRoute.createChild({
-  path: '/reset-password',
-  component: () => import('./billing/reset-password').then(m => ({ default: m.ResetPasswordPage })),
 })
 
 export const BillingSubscriptionRoute = BillingParentRoute.createChild({
@@ -138,6 +119,34 @@ export const BillingCancelRoute = BillingParentRoute.createChild({
 export const BillingNotFoundRoute = BillingParentRoute.createChild({
   path: '/404',
   component: () => import('./billing/404').then(m => ({ default: m.BillingNotFoundPage })),
+})
+
+// ─── Auth Routes (UNPROTECTED — outside BillingParentRoute) ────────────────
+// These pages sit at /billing/* but do NOT use the sidebar layout,
+// so the auth guard in _layout.tsx does not block them.
+
+export const BillingLoginRoute = createRoute({
+  getParentRoute: () => Route,
+  path: '/billing/login',
+  component: () => import('./billing/login').then(m => ({ default: m.BillingLoginPage })),
+})
+
+export const BillingSignupRoute = createRoute({
+  getParentRoute: () => Route,
+  path: '/billing/signup',
+  component: () => import('./billing/signup').then(m => ({ default: m.BillingSignupPage })),
+})
+
+export const BillingForgotPasswordRoute = createRoute({
+  getParentRoute: () => Route,
+  path: '/billing/forgot-password',
+  component: () => import('./billing/forgot-password').then(m => ({ default: m.ForgotPasswordPage })),
+})
+
+export const BillingResetPasswordRoute = createRoute({
+  getParentRoute: () => Route,
+  path: '/billing/reset-password',
+  component: () => import('./billing/reset-password').then(m => ({ default: m.ResetPasswordPage })),
 })
 
 // ─── Global 404 Catch-All ────────────────────────────────────────────────────

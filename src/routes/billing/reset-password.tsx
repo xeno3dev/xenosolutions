@@ -107,9 +107,3 @@ export function ResetPasswordPage() {
     </main>
   )
 }
-
-import { BillingParentRoute } from '../__root'
-export const Route = BillingParentRoute.createChild({
-  path: '/reset-password',
-  component: ResetPasswordPage,
-})

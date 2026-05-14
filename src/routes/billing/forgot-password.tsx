@@ -92,9 +92,3 @@ export function ForgotPasswordPage() {
     </main>
   )
 }
-
-import { BillingParentRoute } from '../__root'
-export const Route = BillingParentRoute.createChild({
-  path: '/forgot-password',
-  component: ForgotPasswordPage,
-})

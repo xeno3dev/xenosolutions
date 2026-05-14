@@ -89,9 +89,3 @@ export function BillingLoginPage() {
     </main>
   )
 }
-
-import { BillingParentRoute } from '../__root'
-export const Route = BillingParentRoute.createChild({
-  path: '/login',
-  component: BillingLoginPage,
-})

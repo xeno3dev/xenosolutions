@@ -1,4 +1,4 @@
-import { Outlet } from '@tanstack/react-router'
+import { Link, Outlet, useLocation } from '@tanstack/react-router'
 import { CreditCard, Settings, FileText, History, LogOut, Shield } from 'lucide-react'
 import { useSession } from '@/lib/api'
 import { cn } from '@/lib/utils'
@@ -14,6 +14,7 @@ const sidebarItems = [
 
 export function BillingLayout() {
   const { data: session } = useSession()
+  const location = useLocation()
 
   if (!session) {
     return null
@@ -39,19 +40,19 @@ export function BillingLayout() {
 
         <nav className="flex-1 py-3">
           {sidebarItems.map((item) => (
-            <a
+            <Link
               key={item.to}
-              href={item.to}
+              to={item.to}
               className={cn(
                 'w-full flex items-center gap-3 px-5 py-2.5 text-sm font-medium transition-colors',
-                window.location.pathname === item.to
+                location.pathname === item.to
                   ? 'text-[var(--lagoon-deep)] bg-[var(--hero-a)]'
                   : 'text-[var(--sea-ink-soft)] hover:text-[var(--sea-ink)] hover:bg-[var(--surface)]',
               )}
             >
               <item.icon className="h-4 w-4 flex-shrink-0" />
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
